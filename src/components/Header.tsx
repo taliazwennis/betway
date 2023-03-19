@@ -2,10 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface Props {
-  onLogin: (isTrue: boolean) => void
+  onLogin: (isTrue: boolean) => void;
+  onRegister: (isTrue: boolean) => void;
 }
 
-const Header = ({onLogin}: Props) => {
+const Header = ({ onLogin, onRegister }: Props) => {
   return (
     <div className="row login-bar">
       <div className="col-6">
@@ -20,14 +21,20 @@ const Header = ({onLogin}: Props) => {
       <div className="col-6 button-group">
         <button
           onClick={() => {
-            onLogin(true)
-            
+            onLogin(true);
           }}
           className="button"
         >
           Login
         </button>
-        <button className="button sign-up">Sign up</button>
+        <button
+          className="button sign-up"
+          onClick={() => {
+            onRegister(true);
+          }}
+        >
+          Sign up
+        </button>
       </div>
     </div>
   );

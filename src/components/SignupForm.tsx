@@ -6,11 +6,11 @@ import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   onClose: (isTrue: boolean) => void;
-  onOpenReg: (isTrue: boolean) => void;
 }
 
-const LoginForm = ({ onClose, onOpenReg }: Props) => {
+const SignupForm = ({ onClose }: Props) => {
   interface FormData {
+    name: string;
     username: string;
     password: string;
   }
@@ -24,6 +24,7 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
+    name: "",
   });
 
   const handleChange = (
@@ -40,11 +41,11 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
     const isEmailValid = emailExpression.test(formData.username);
     const isPasswordValid = passwordExpression.test(formData.password);
 
-    setIsValidEmail(isEmailValid)
+    setIsValidEmail(isEmailValid);
     setIsValidPassword(isPasswordValid);
 
     if (isEmailValid && isPasswordValid) {
-      console.log('valid', isValidEmail, isValidPassword);
+      console.log("valid", isValidEmail, isValidPassword);
       submitData(e);
     } else {
       setIsSubmitted(false);
@@ -63,10 +64,9 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
     try {
       const response = await fetch("/api/sign-in", options);
       const data = await response.json();
-
-      if (data.accountStatus === "verified") {
-        console.log(`Welcome, ${data.name}`);
-        setIsSubmitted(true);
+      {
+        data.accountStatus === "verified" &&
+          console.log(`Welcome, ${data.name}`);
       }
     } catch (error) {
       console.error(error);
@@ -79,19 +79,20 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
         <CloseIcon />
       </IconButton>
       <div className="login-intro">
-        <h4>Login</h4>
-        <p>
-          New customer?{" "}
-          <Link
-            href={"#"}
-            onClick={() => {
-              onOpenReg(true), onClose(false);
-            }}
-          >
-            Register Here
-          </Link>
-        </p>
+        <h4>Register</h4>
       </div>
+      <label className="login-label" htmlFor="name">
+        Full Name
+      </label>
+      <input
+        className="input-box"
+        type="text"
+        id="name"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
       <label className="login-label" htmlFor="username">
         Username
       </label>
@@ -130,11 +131,13 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
       <div className="forgot-details">
         <Link href="/">Forgot Username/Password</Link>
       </div>
-      {isSubmitted === true && (
-        <p className="success-message">You have been successfully logged in!</p>
+      {isSubmitted && (
+        <p className="success-message">
+          Welcome {formData.name}! Thank you for registering at Betway
+        </p>
       )}
     </form>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

@@ -10,9 +10,14 @@ const MENU_LIST = [
   { text: "esports", color: "orange" },
   { text: "vegas", color: "red" },
 ];
-const Navbar = () => {
+
+interface Props {
+  changeAccent: (color: string) => void;
+}
+
+const Navbar = ({ changeAccent }: Props) => {
   const [navActive, setNavActive] = useState<boolean | null>(null);
-  const [activeIdx, setActiveIdx] = useState<number>(-1);
+  const [activeIdx, setActiveIdx] = useState<number>(0);
 
   return (
     <>
@@ -22,6 +27,7 @@ const Navbar = () => {
             onClick={() => {
               setActiveIdx(idx);
               setNavActive(false);
+              changeAccent(menu.color);
             }}
             key={menu.text}
           >
