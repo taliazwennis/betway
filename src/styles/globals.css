@@ -231,6 +231,12 @@ form a {
   margin-right: auto;
 }
 
+.success-message {
+  color: #0d9541;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 /* UTILS */
 .center-in-parent {
   position: absolute;
