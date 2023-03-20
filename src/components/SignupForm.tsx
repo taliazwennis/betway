@@ -45,7 +45,6 @@ const SignupForm = ({ onClose }: Props) => {
     setIsValidPassword(isPasswordValid);
 
     if (isEmailValid && isPasswordValid) {
-      console.log("valid", isValidEmail, isValidPassword);
       submitData(e);
     } else {
       setIsSubmitted(false);

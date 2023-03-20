@@ -130,23 +130,23 @@ nav {
   border-bottom: 4px solid rgb(255, 145, 0);
 }
 
-.button.green {
+.background-green {
   background-color: #00c811;
 }
 
-.button.red {
+.background-red {
   background-color: red;
 }
 
-.button.blue {
+.background-blue {
   background-color: rgb(0, 175, 202);
 }
 
-.button.purple {
+.background-purple {
   background-color: rgb(162, 0, 255);
 }
 
-.button.orange {
+.background-orange {
   background-color: rgb(255, 145, 0);
 }
 
@@ -201,6 +201,13 @@ nav {
 
 .login-form {
   background-color: white;
+  width: 100%;
+  padding: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.celebration-banner {
+  color: white;
   width: 100%;
   padding: 1.5rem;
   padding-bottom: 3rem;
@@ -277,6 +284,10 @@ form a {
   transform: translate(-50%, -50%);
 }
 
+.confetti {
+  z-index: 999;
+}
+
 /* -------- MEDIA --------- */
 
 /* Small devices (landscape phones, 576px and up) */
@@ -304,7 +315,7 @@ form a {
 @media (min-width: 992px) {
   .hero-image {
     background-image: url(/the-hunch-mobile.png);
-    z-index: -1;
+    /* z-index: -1; */
   }
 
   body {
@@ -316,6 +327,10 @@ form a {
   }
 
   .login-form {
+    width: 90%;
+  }
+
+  .celebration-banner {
     width: 90%;
   }
 }

@@ -13,7 +13,7 @@ const Footer = ({ buttonColor, onCelebrate }: Props) => {
         onClick={() => {
           onCelebrate();
         }}
-        className={`button ${buttonColor} join-now`}
+        className={`button background-${buttonColor} join-now`}
       >
         {" "}
         Join Now{" "}

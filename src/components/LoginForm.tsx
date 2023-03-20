@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -44,7 +43,6 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
     setIsValidPassword(isPasswordValid);
 
     if (isEmailValid && isPasswordValid) {
-      console.log('valid', isValidEmail, isValidPassword);
       submitData(e);
     } else {
       setIsSubmitted(false);

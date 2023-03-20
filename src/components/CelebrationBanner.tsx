@@ -1,43 +1,33 @@
-import { useState } from "react";
-import Confetti from "react-dom-confetti";
+import Link from "next/link";
+import Image from "next/image";
 
-const Celebration = () => {
-  const [isCelebrating, setIsCelebrating] = useState(false);
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
-  const config = {
-    angle: 90,
-    spread: 360,
-    startVelocity: 40,
-    elementCount: 200,
-    dragFriction: 0.12,
-    duration: 4000,
-    stagger: 3,
-    width: "10px",
-    height: "10px",
-    colors: [
-      "#00c811",
-      "red",
-      "rgb(0, 175, 202)",
-      "rgb(162, 0, 255)",
-      "rgb(255, 145, 0)",
-    ],
-  };
+interface Props {
+  formColor: string;
+  onClose: (isTrue: boolean) => void;
+}
 
-  const handleStartCelebration = () => {
-    setIsCelebrating(true);
-  };
-
-  const handleStopCelebration = () => {
-    setIsCelebrating(false);
-  };
-
+const CelebrationBanner = ({ onClose, formColor }: Props) => {
   return (
-    <>
-      
-      <Confetti active={isCelebrating} config={config} />
-      <button onClick={handleStopCelebration}>Stop Celebration</button>
-    </>
+    <div
+      className={` background-${formColor} celebration-banner center-in-parent `}
+    >
+      <IconButton
+        className="close-icon"
+        onClick={() => {
+          onClose(false);
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <div className="login-intro">
+        <h2>Thank you for considering my application!</h2>
+        <p> ~ Talia Zwennis</p>
+      </div>
+    </div>
   );
 };
 
-export default Celebration;
+export default CelebrationBanner;

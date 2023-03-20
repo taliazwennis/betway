@@ -3,22 +3,23 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Confetti, { ConfettiProps } from "react-dom-confetti";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import LoginForm from "@/components/LoginForm";
 import JoinNow from "@/components/JoinNow";
 import SignupForm from "@/components/SignupForm";
-import { AnyARecord } from "dns";
+import CelebrationBanner from "@/components/CelebrationBanner";
 
 export default function Home() {
   const [loginActive, setLoginActive] = useState<boolean>(false);
   const [registerActive, setRegisterActive] = useState<boolean>(false);
+  const [celebrationActive, setCelebrationActive] = useState<boolean>(false);
   const [accentColor, setAccentColor] = useState<string>("green");
   const [isConfettiActive, setIsConfettiActive] = useState<boolean>(false);
 
-  const confettiConfig = {
+  const confettiConfig: any = {
     angle: 180,
     spread: 360,
     startVelocity: 40,
@@ -38,8 +39,8 @@ export default function Home() {
   };
 
   const handleConfettiClick = () => {
-    console.log("Activate Confetti");
     setIsConfettiActive(true);
+    setCelebrationActive(true);
     setTimeout(() => {
       setIsConfettiActive(false);
     }, 2000);
@@ -47,7 +48,9 @@ export default function Home() {
 
   return (
     <>
-      <Confetti active={isConfettiActive} config={confettiConfig} />
+      <div className="confetti">
+        <Confetti active={isConfettiActive} config={confettiConfig} />
+      </div>
       <div id="header">
         <header>
           <Header onLogin={setLoginActive} onRegister={setRegisterActive} />
@@ -65,6 +68,12 @@ export default function Home() {
               />
             )}
             {registerActive && <SignupForm onClose={setRegisterActive} />}
+            {celebrationActive && (
+              <CelebrationBanner
+                onClose={setCelebrationActive}
+                formColor={accentColor}
+              />
+            )}
           </div>
           <div className="d-none d-lg-block col-lg-6 col-xl-7 position-relative">
             <JoinNow
