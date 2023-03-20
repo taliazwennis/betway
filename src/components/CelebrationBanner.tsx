@@ -1,12 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
-
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   formColor: string;
-  onClose: (isTrue: boolean) => void;
+  onClose: () => void;
 }
 
 const CelebrationBanner = ({ onClose, formColor }: Props) => {
@@ -17,7 +14,7 @@ const CelebrationBanner = ({ onClose, formColor }: Props) => {
       <IconButton
         className="close-icon"
         onClick={() => {
-          onClose(false);
+          onClose();
         }}
       >
         <CloseIcon />

@@ -1,29 +1,22 @@
-import Link from "next/link";
-import Image from "next/image";
-import React, { useState } from "react";
-import NavItem from "./NavItem";
+import React from "react";
 
 interface Props {
   buttonColor: string;
-  onCelebrate: () => void;
+  onJoin: () => void;
 }
 
-const JoinNow = ({ buttonColor, onCelebrate }: Props) => {
-  const [navActive, setNavActive] = useState<boolean | null>(null);
-  const [activeIdx, setActiveIdx] = useState<number>(-1);
-
+const JoinNow = ({ buttonColor, onJoin }: Props) => {
   return (
     <div className="join-now-side center-in-parent">
       <h3>SPORTS NEW CUSTOMER OFFER</h3>
       <h2>Get up to £10 in Free Bets </h2>
       <button
         onClick={() => {
-          onCelebrate();
+          onJoin();
         }}
         className={`button background-${buttonColor} join-now`}
       >
-        {" "}
-        Join Now{" "}
+        Join Now
       </button>
     </div>
   );

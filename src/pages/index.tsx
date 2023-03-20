@@ -1,9 +1,5 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import Confetti, { ConfettiProps } from "react-dom-confetti";
-import React, { useState, useEffect } from "react";
+import Confetti from "react-dom-confetti";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -53,7 +49,10 @@ export default function Home() {
       </div>
       <div id="header">
         <header>
-          <Header onLogin={setLoginActive} onRegister={setRegisterActive} />
+          <Header
+            onLogin={() => setLoginActive(true)}
+            onRegister={() => setRegisterActive(true)}
+          />
           <Navbar changeAccent={setAccentColor} />
         </header>
       </div>
@@ -63,29 +62,31 @@ export default function Home() {
           <div className="col-12 col-lg-6 col-xl-5 position-relative hero-image">
             {loginActive && (
               <LoginForm
-                onClose={setLoginActive}
-                onOpenReg={setRegisterActive}
+                onClose={() => setLoginActive(false)}
+                onOpenReg={() => setRegisterActive(true)}
               />
             )}
-            {registerActive && <SignupForm onClose={setRegisterActive} />}
+            {registerActive && (
+              <SignupForm
+                onClose={() => setRegisterActive(false)}
+                onOpenLogin={() => setLoginActive(true)}
+              />
+            )}
             {celebrationActive && (
               <CelebrationBanner
-                onClose={setCelebrationActive}
+                onClose={() => setCelebrationActive(false)}
                 formColor={accentColor}
               />
             )}
           </div>
           <div className="d-none d-lg-block col-lg-6 col-xl-7 position-relative">
-            <JoinNow
-              buttonColor={accentColor}
-              onCelebrate={handleConfettiClick}
-            />
+            <JoinNow buttonColor={accentColor} onJoin={handleConfettiClick} />
           </div>
         </div>
       </div>
 
       <div id="footer">
-        <Footer buttonColor={accentColor} onCelebrate={handleConfettiClick} />
+        <Footer buttonColor={accentColor} onJoin={handleConfettiClick} />
       </div>
     </>
   );

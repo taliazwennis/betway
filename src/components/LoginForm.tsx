@@ -4,8 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
-  onClose: (isTrue: boolean) => void;
-  onOpenReg: (isTrue: boolean) => void;
+  onClose: () => void;
+  onOpenReg: () => void;
 }
 
 const LoginForm = ({ onClose, onOpenReg }: Props) => {
@@ -39,7 +39,7 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
     const isEmailValid = emailExpression.test(formData.username);
     const isPasswordValid = passwordExpression.test(formData.password);
 
-    setIsValidEmail(isEmailValid)
+    setIsValidEmail(isEmailValid);
     setIsValidPassword(isPasswordValid);
 
     if (isEmailValid && isPasswordValid) {
@@ -62,28 +62,27 @@ const LoginForm = ({ onClose, onOpenReg }: Props) => {
       const response = await fetch("/api/sign-in", options);
       const data = await response.json();
 
-      if (data.accountStatus === "verified") {
-        console.log(`Welcome, ${data.name}`);
-        setIsSubmitted(true);
-      }
+      console.log(`Welcome, ${data.name}`);
+      setIsSubmitted(true);
     } catch (error) {
       console.error(error);
+      setIsSubmitted(false);
     }
   };
 
   return (
     <form className="login-form center-in-parent" onSubmit={handleSubmit}>
-      <IconButton className="close-icon" onClick={() => onClose(false)}>
+      <IconButton className="close-icon" onClick={() => onClose()}>
         <CloseIcon />
       </IconButton>
       <div className="login-intro">
         <h4>Login</h4>
         <p>
-          New customer?{" "}
+          New customer?&nbsp;
           <Link
             href={"#"}
             onClick={() => {
-              onOpenReg(true), onClose(false);
+              onOpenReg(), onClose();
             }}
           >
             Register Here

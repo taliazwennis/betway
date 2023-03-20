@@ -1,14 +1,14 @@
 import Link from "next/link";
-import Image from "next/image";
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
-  onClose: (isTrue: boolean) => void;
+  onClose: () => void;
+  onOpenLogin: () => void;
 }
 
-const SignupForm = ({ onClose }: Props) => {
+const SignupForm = ({ onClose, onOpenLogin }: Props) => {
   interface FormData {
     name: string;
     username: string;
@@ -17,7 +17,7 @@ const SignupForm = ({ onClose }: Props) => {
 
   const emailExpression: RegExp =
     /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
-  const passwordExpression: RegExp = /^\S{8,}$/m;
+  const passwordExpression: RegExp = /^\S{8,}$/;
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -63,22 +63,33 @@ const SignupForm = ({ onClose }: Props) => {
     try {
       const response = await fetch("/api/sign-in", options);
       const data = await response.json();
-      {
-        data.accountStatus === "verified" &&
-          console.log(`Welcome, ${data.name}`);
-      }
+
+      console.log(`Welcome, ${data.name}`);
+      setIsSubmitted(true);
     } catch (error) {
       console.error(error);
+      setIsSubmitted(false);
     }
   };
 
   return (
     <form className="login-form center-in-parent" onSubmit={handleSubmit}>
-      <IconButton className="close-icon" onClick={() => onClose(false)}>
+      <IconButton className="close-icon" onClick={() => onClose()}>
         <CloseIcon />
       </IconButton>
       <div className="login-intro">
         <h4>Register</h4>
+        <p>
+          Already a customer?&nbsp;
+          <Link
+            href={"#"}
+            onClick={() => {
+              onOpenLogin(), onClose();
+            }}
+          >
+            Login Here
+          </Link>
+        </p>
       </div>
       <label className="login-label" htmlFor="name">
         Full Name
@@ -125,7 +136,7 @@ const SignupForm = ({ onClose }: Props) => {
         </p>
       )}
       <button className="button login" type="submit">
-        Login
+        Register
       </button>
       <div className="forgot-details">
         <Link href="/">Forgot Username/Password</Link>

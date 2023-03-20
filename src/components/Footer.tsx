@@ -1,22 +1,20 @@
-
 interface Props {
   buttonColor: string;
-  onCelebrate: () => void;
+  onJoin: () => void;
 }
 
-const Footer = ({ buttonColor, onCelebrate }: Props) => {
+const Footer = ({ buttonColor, onJoin }: Props) => {
   return (
     <div className="footer-section">
       <h3>SPORTS NEW CUSTOMER OFFER</h3>
       <h2>Get up to £10 in Free Bets </h2>
       <button
         onClick={() => {
-          onCelebrate();
+          onJoin();
         }}
         className={`button background-${buttonColor} join-now`}
       >
-        {" "}
-        Join Now{" "}
+        Join Now
       </button>
     </div>
   );

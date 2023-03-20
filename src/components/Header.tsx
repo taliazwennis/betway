@@ -1,9 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
 
 interface Props {
-  onLogin: (isTrue: boolean) => void;
-  onRegister: (isTrue: boolean) => void;
+  onLogin: () => void;
+  onRegister: () => void;
 }
 
 const Header = ({ onLogin, onRegister }: Props) => {
@@ -21,7 +20,7 @@ const Header = ({ onLogin, onRegister }: Props) => {
       <div className="col-6 button-group">
         <button
           onClick={() => {
-            onLogin(true);
+            onLogin();
           }}
           className="button"
         >
@@ -30,7 +29,7 @@ const Header = ({ onLogin, onRegister }: Props) => {
         <button
           className="button sign-up"
           onClick={() => {
-            onRegister(true);
+            onRegister();
           }}
         >
           Sign up
